@@ -10,8 +10,8 @@
     'data': [
         'security/equipment_security.xml',
         'security/ir.model.access.csv',
-        'views/assignment_views.xml',
         'views/equipment_views.xml',
+        'views/assignment_views.xml',
         'views/menu.xml',
     ],
 }
