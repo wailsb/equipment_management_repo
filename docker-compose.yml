@@ -7,10 +7,9 @@ services:
       - db
     ports:
       - "8069:8069"
-    # Overrides the default entrypoint to append your custom addons directory path
     command: odoo --addons-path=/usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons -d test_equipment_db -i equipment_gest
     volumes:
-      - ./addons:/mnt/extra-addons
+      - .:/mnt/extra-addons
     environment:
       - HOST=db
       - USER=odoo
