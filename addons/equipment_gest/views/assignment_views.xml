@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+        <!-- Form View -->
+        <record id="equipment_assignment_form_view" model="ir.ui.view">
+            <field name="name">equipment.assignment.form.view</field>
+            <field name="model">equipment.assignment</field>
+            <field name="arch" type="xml">
+                <form string="Equipment Assignment">
+                    <sheet>
+                        <group>
+                            <field name="equipment_id"/>
+                        </group>
+                        <group>
+                            <field name="employee_id"/>
+                        </group>
+                        <group>
+                            <field name="date_allocated"/>
+                        </group>
+                        <group>
+                            <field name="state"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record id="equipment_assignment_tree_view" model="ir.ui.view">
+            <field name="name">equipment.assignment.tree.view</field>
+            <field name="model">equipment.assignment</field>
+            <field name="arch" type="xml">
+                <tree string="Equipment Assignments">
+                    <field name="equipment_id"/>
+                    <field name="employee_id"/>
+                    <field name="date_allocated"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_equipment_assignment" model="ir.actions.act_window">
+            <field name="name">Equipment Assignments</field>
+            <field name="res_model">equipment.assignment</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>

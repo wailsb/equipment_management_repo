@@ -1,0 +1,7 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_equipment_item_user","Equipment Item User","model_equipment_item","equipment_user_group",1,0,0,0
+"access_equipment_item_manager","Equipment Item Manager","model_equipment_item","equipment_manager_group",1,1,1,1
+"access_equipment_assignment_user","Equipment Assignment User","model_equipment_assignment","equipment_user_group",1,1,1,1
+"access_equipment_assignment_manager","Equipment Assignment Manager","model_equipment_assignment","equipment_manager_group",1,1,1,1
+"access_equipment_category_user","Equipment Category User","model_equipment_category","equipment_user_group",1,0,0,0
+"access_equipment_category_manager","Equipment Category Manager","model_equipment_category","equipment_manager_group",1,1,1,1
