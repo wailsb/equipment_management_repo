@@ -1,0 +1,71 @@
+<odoo>
+    <data>
+        <!-- Form View -->
+        <record id="equipment_item_form_view" model="ir.ui.view">
+            <field name="name">equipment.item.form.view</field>
+            <field name="model">equipment.item</field>
+            <field name="arch" type="xml">
+                <form string="Equipment Item">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="serial_no" string="Serial Number"/>
+                        </group>
+                        <group>
+                            <field name="category_id" string="Category"/>
+                        </group>
+                        <group>
+                            <field name="status" string="Status"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record id="equipment_item_tree_view" model="ir.ui.view">
+            <field name="name">equipment.item.tree.view</field>
+            <field name="model">equipment.item</field>
+            <field name="arch" type="xml">
+                <tree string="Equipment Items">
+                    <field name="name"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Kanban View -->
+        <record id="equipment_item_kanban_view" model="ir.ui.view">
+            <field name="name">equipment.item.kanban.view</field>
+            <field name="model">equipment.item</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="status">
+                    <field name="status"/>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="equipment_item_search_view" model="ir.ui.view">
+            <field name="name">equipment.item.search.view</field>
+            <field name="model">equipment.item</field>
+            <field name="arch" type="xml">
+                <search string="Equipment Items">
+                    <filter name="available" string="Available" domain="[('status', '=', 'available')]"/>
+                    <filter name="under_maintenance" string="Under Maintenance" domain="[('status', '=', 'maintenance')]"/>
+                    <field name="category_id" string="Category"/>
+                    <field name="status" string="Status"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_equipment_item" model="ir.actions.act_window">
+            <field name="name">Equipment Items</field>
+            <field name="res_model">equipment.item</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+    </data>
+</odoo>
