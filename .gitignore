@@ -1,0 +1,13 @@
+# Local Docker Data Volume (Do not push local DB data)
+.odoo_db_data/
+
+# Odoo Runtime Logging & Configurations
+*.log
+*.conf
+
+# Python Bytecode and System Caches
+**/__pycache__/
+*.pyc
+.DS_Store
+.idea/
+.vscode/
