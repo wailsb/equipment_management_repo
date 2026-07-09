@@ -5,20 +5,47 @@
             <field name="name">equipment.item.form.view</field>
             <field name="model">equipment.item</field>
             <field name="arch" type="xml">
-                <form string="Equipment Item">
+                <form string="Equipment">
+                    <header>
+                        <button name="action_set_available" string="Set Available" type="object" class="btn-primary" invisible="status == 'available'"/>
+                        <button name="action_set_maintenance" string="Send to Maintenance" type="object" invisible="status == 'maintenance'"/>
+                        <field name="status" widget="statusbar" statusbar_visible="available,assigned,maintenance"/>
+                    </header>
                     <sheet>
+                        <field name="image" widget="image" class="oe_avatar" options="{'preview_image': 'image'}"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Equipment Name"/>
+                            </h1>
+                        </div>
                         <group>
-                            <field name="name"/>
+                            <group string="Details">
+                                <field name="serial_no"/>
+                                <field name="category_id"/>
+                            </group>
+                            <group string="Status">
+                                <field name="status" readonly="1"/>
+                                <field name="assigned_to_id" readonly="1"/>
+                            </group>
                         </group>
-                        <group>
-                            <field name="serial_no" string="Serial Number"/>
-                        </group>
-                        <group>
-                            <field name="category_id" string="Category"/>
-                        </group>
-                        <group>
-                            <field name="status" string="Status"/>
-                        </group>
+                        <notebook>
+                            <page string="Assignment History">
+                                <field name="assignment_ids" readonly="1">
+                                    <tree>
+                                        <field name="employee_id"/>
+                                        <field name="date_assigned"/>
+                                        <field name="date_returned"/>
+                                        <field name="state" widget="badge"
+                                               decoration-info="state == 'draft'"
+                                               decoration-success="state == 'active'"
+                                               decoration-muted="state == 'returned'"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Notes">
+                                <field name="notes" placeholder="Internal notes..."/>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
@@ -29,9 +56,15 @@
             <field name="name">equipment.item.tree.view</field>
             <field name="model">equipment.item</field>
             <field name="arch" type="xml">
-                <tree string="Equipment Items">
+                <tree string="Equipment">
                     <field name="name"/>
-                    <field name="status"/>
+                    <field name="serial_no"/>
+                    <field name="category_id"/>
+                    <field name="assigned_to_id"/>
+                    <field name="status" widget="badge"
+                           decoration-success="status == 'available'"
+                           decoration-info="status == 'assigned'"
+                           decoration-warning="status == 'maintenance'"/>
                 </tree>
             </field>
         </record>
@@ -42,7 +75,29 @@
             <field name="model">equipment.item</field>
             <field name="arch" type="xml">
                 <kanban default_group_by="status">
+                    <field name="name"/>
+                    <field name="serial_no"/>
+                    <field name="category_id"/>
                     <field name="status"/>
+                    <field name="assigned_to_id"/>
+                    <field name="image"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="o_kanban_image">
+                                    <img t-att-src="kanban_image('equipment.item', 'image', record.id.raw_value)" alt="Equipment" class="o_image_64_cover"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong><field name="name"/></strong>
+                                    <div class="text-muted">S/N: <field name="serial_no"/></div>
+                                    <div><field name="category_id"/></div>
+                                    <div t-if="record.assigned_to_id.raw_value" class="text-info">
+                                        &#128100; <field name="assigned_to_id"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
                 </kanban>
             </field>
         </record>
@@ -52,20 +107,36 @@
             <field name="name">equipment.item.search.view</field>
             <field name="model">equipment.item</field>
             <field name="arch" type="xml">
-                <search string="Equipment Items">
+                <search string="Equipment">
+                    <field name="name" filter_domain="['|', ('name', 'ilike', self), ('serial_no', 'ilike', self)]" string="Equipment"/>
+                    <field name="serial_no"/>
+                    <field name="category_id"/>
+                    <field name="assigned_to_id"/>
+                    <separator/>
                     <filter name="available" string="Available" domain="[('status', '=', 'available')]"/>
-                    <filter name="under_maintenance" string="Under Maintenance" domain="[('status', '=', 'maintenance')]"/>
-                    <field name="category_id" string="Category"/>
-                    <field name="status" string="Status"/>
+                    <filter name="assigned" string="Assigned" domain="[('status', '=', 'assigned')]"/>
+                    <filter name="maintenance" string="Under Maintenance" domain="[('status', '=', 'maintenance')]"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_category" string="Category" context="{'group_by': 'category_id'}"/>
+                        <filter name="group_by_status" string="Status" context="{'group_by': 'status'}"/>
+                        <filter name="group_by_assigned" string="Assigned To" context="{'group_by': 'assigned_to_id'}"/>
+                    </group>
                 </search>
             </field>
         </record>
 
         <!-- Action -->
         <record id="action_equipment_item" model="ir.actions.act_window">
-            <field name="name">Equipment Items</field>
+            <field name="name">Equipment</field>
             <field name="res_model">equipment.item</field>
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="search_view_id" ref="equipment_item_search_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Register your first piece of equipment
+                </p>
+            </field>
         </record>
     </data>
 </odoo>

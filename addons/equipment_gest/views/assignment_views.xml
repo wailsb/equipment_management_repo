@@ -5,20 +5,42 @@
             <field name="name">equipment.assignment.form.view</field>
             <field name="model">equipment.assignment</field>
             <field name="arch" type="xml">
-                <form string="Equipment Assignment">
+                <form string="Assignment">
+                    <header>
+                        <button name="action_confirm" string="Confirm" type="object" class="btn-primary" invisible="state != 'draft'"/>
+                        <button name="action_return" string="Return Equipment" type="object" class="btn-primary" invisible="state != 'active'"/>
+                        <button name="action_reset_draft" string="Reset to Draft" type="object" invisible="state == 'draft'"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,active,returned"/>
+                    </header>
                     <sheet>
                         <group>
-                            <field name="equipment_id"/>
+                            <group string="Assignment">
+                                <field name="equipment_id"/>
+                                <field name="employee_id"/>
+                                <field name="department_id"/>
+                            </group>
+                            <group string="Dates">
+                                <field name="date_assigned"/>
+                                <field name="date_returned" invisible="state != 'returned'"/>
+                            </group>
                         </group>
-                        <group>
-                            <field name="employee_id"/>
-                        </group>
-                        <group>
-                            <field name="date_allocated"/>
-                        </group>
-                        <group>
-                            <field name="state"/>
-                        </group>
+                        <notebook>
+                            <page string="Details">
+                                <group>
+                                    <group string="Usage">
+                                        <field name="location" placeholder="e.g. Building A, Floor 2"/>
+                                        <field name="purpose" placeholder="e.g. Development work"/>
+                                    </group>
+                                    <group string="Condition">
+                                        <field name="condition_on_assign"/>
+                                        <field name="condition_on_return" invisible="state != 'returned'"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Notes">
+                                <field name="notes" placeholder="Additional information about this assignment..."/>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
@@ -29,20 +51,57 @@
             <field name="name">equipment.assignment.tree.view</field>
             <field name="model">equipment.assignment</field>
             <field name="arch" type="xml">
-                <tree string="Equipment Assignments">
+                <tree string="Assignments">
                     <field name="equipment_id"/>
                     <field name="employee_id"/>
-                    <field name="date_allocated"/>
-                    <field name="state"/>
+                    <field name="department_id" optional="hide"/>
+                    <field name="location" optional="hide"/>
+                    <field name="date_assigned"/>
+                    <field name="date_returned"/>
+                    <field name="state" widget="badge"
+                           decoration-info="state == 'draft'"
+                           decoration-success="state == 'active'"
+                           decoration-muted="state == 'returned'"/>
                 </tree>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="equipment_assignment_search_view" model="ir.ui.view">
+            <field name="name">equipment.assignment.search.view</field>
+            <field name="model">equipment.assignment</field>
+            <field name="arch" type="xml">
+                <search string="Assignments">
+                    <field name="equipment_id"/>
+                    <field name="employee_id"/>
+                    <field name="location"/>
+                    <separator/>
+                    <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                    <filter name="active_assignments" string="Active" domain="[('state', '=', 'active')]"/>
+                    <filter name="returned" string="Returned" domain="[('state', '=', 'returned')]"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_employee" string="Employee" context="{'group_by': 'employee_id'}"/>
+                        <filter name="group_by_department" string="Department" context="{'group_by': 'department_id'}"/>
+                        <filter name="group_by_equipment" string="Equipment" context="{'group_by': 'equipment_id'}"/>
+                        <filter name="group_by_state" string="State" context="{'group_by': 'state'}"/>
+                        <filter name="group_by_date" string="Assigned Date" context="{'group_by': 'date_assigned:month'}"/>
+                    </group>
+                </search>
             </field>
         </record>
 
         <!-- Action -->
         <record id="action_equipment_assignment" model="ir.actions.act_window">
-            <field name="name">Equipment Assignments</field>
+            <field name="name">Assignments</field>
             <field name="res_model">equipment.assignment</field>
             <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="equipment_assignment_search_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first equipment assignment
+                </p>
+            </field>
         </record>
     </data>
 </odoo>

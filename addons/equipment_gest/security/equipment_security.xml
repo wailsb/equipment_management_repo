@@ -1,19 +1,23 @@
 <odoo>
     <data>
+        <!-- Module Category -->
         <record id="equipment_management_category" model="ir.module.category">
-            <field name="name">Enterprise Equipment Management</field>
+            <field name="name">Equipment Management</field>
             <field name="sequence">100</field>
         </record>
 
+        <!-- Operational User: daily assignment management -->
         <record id="equipment_user_group" model="res.groups">
-            <field name="name">User</field>
+            <field name="name">Operational User</field>
             <field name="category_id" ref="equipment_management_category"/>
         </record>
 
+        <!-- Manager: full equipment supervision -->
         <record id="equipment_manager_group" model="res.groups">
             <field name="name">Manager</field>
             <field name="category_id" ref="equipment_management_category"/>
             <field name="implied_ids" eval="[(4, ref('equipment_user_group'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
         </record>
     </data>
 </odoo>

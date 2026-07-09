@@ -1,6 +1,6 @@
 # Local Docker Data Volume (Do not push local DB data)
 .odoo_db_data/
-
+.docker-compose.yml
 # Odoo Runtime Logging & Configurations
 *.log
 *.conf

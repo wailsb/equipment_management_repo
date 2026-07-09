@@ -1,0 +1,64 @@
+<odoo>
+    <data>
+        <!-- Category Form View -->
+        <record id="equipment_category_form_view" model="ir.ui.view">
+            <field name="name">equipment.category.form.view</field>
+            <field name="model">equipment.category</field>
+            <field name="arch" type="xml">
+                <form string="Equipment Category">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Category Name"/>
+                            </h1>
+                        </div>
+                        <notebook>
+                            <page string="Equipment Items">
+                                <field name="equipment_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="serial_no"/>
+                                        <field name="status" widget="badge"
+                                               decoration-success="status == 'available'"
+                                               decoration-info="status == 'assigned'"
+                                               decoration-warning="status == 'maintenance'"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Category Tree View -->
+        <record id="equipment_category_tree_view" model="ir.ui.view">
+            <field name="name">equipment.category.tree.view</field>
+            <field name="model">equipment.category</field>
+            <field name="arch" type="xml">
+                <tree string="Equipment Categories">
+                    <field name="name"/>
+                    <field name="equipment_count" string="# Equipment"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Category Search View -->
+        <record id="equipment_category_search_view" model="ir.ui.view">
+            <field name="name">equipment.category.search.view</field>
+            <field name="model">equipment.category</field>
+            <field name="arch" type="xml">
+                <search string="Equipment Categories">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Category Action -->
+        <record id="action_equipment_category" model="ir.actions.act_window">
+            <field name="name">Categories</field>
+            <field name="res_model">equipment.category</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>
