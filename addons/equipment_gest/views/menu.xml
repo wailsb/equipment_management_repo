@@ -1,12 +1,68 @@
 <odoo>
     <data>
-        <!-- Root Menu -->
-        <menuitem id="menu_equipment_management" name="Equipment Management" sequence="100"/>
+        <!-- ============================================ -->
+        <!-- Root Menu (visible to all equipment users)   -->
+        <!-- ============================================ -->
+        <menuitem id="menu_equipment_management"
+                  name="Equipment Management"
+                  groups="equipment_gest.equipment_user_group"
+                  sequence="100"/>
 
-        <!-- Sub-menu for Equipments -->
-        <menuitem id="menu_equipment" name="Equipments" parent="menu_equipment_management" action="action_equipment_item" sequence="10"/>
+        <!-- ============================================ -->
+        <!-- Equipment sub-menu (visible to all users)    -->
+        <!-- ============================================ -->
+        <menuitem id="menu_equipment"
+                  name="Equipment"
+                  parent="menu_equipment_management"
+                  action="action_equipment_item"
+                  groups="equipment_gest.equipment_user_group"
+                  sequence="10"/>
 
-        <!-- Sub-menu for Assignments -->
-        <menuitem id="menu_assignment" name="Assignments" parent="menu_equipment_management" action="action_equipment_assignment" sequence="20"/>
+        <!-- ============================================ -->
+        <!-- Assignments sub-menu (visible to all users)  -->
+        <!-- ============================================ -->
+        <menuitem id="menu_assignment"
+                  name="Assignments"
+                  parent="menu_equipment_management"
+                  action="action_equipment_assignment"
+                  groups="equipment_gest.equipment_user_group"
+                  sequence="20"/>
+
+        <!-- ============================================ -->
+        <!-- Categories sub-menu (manager only)           -->
+        <!-- ============================================ -->
+        <menuitem id="menu_category"
+                  name="Categories"
+                  parent="menu_equipment_management"
+                  action="action_equipment_category"
+                  groups="equipment_gest.equipment_manager_group"
+                  sequence="30"/>
+
+        <!-- ============================================ -->
+        <!-- History parent menu (manager only)           -->
+        <!-- ============================================ -->
+        <menuitem id="menu_history"
+                  name="History"
+                  parent="menu_equipment_management"
+                  groups="equipment_gest.equipment_manager_group"
+                  sequence="40"/>
+
+        <menuitem id="menu_history_all"
+                  name="All Logs"
+                  parent="menu_history"
+                  action="action_equipment_log_all"
+                  sequence="10"/>
+
+        <menuitem id="menu_history_equipment"
+                  name="Equipment Logs"
+                  parent="menu_history"
+                  action="action_equipment_log_equipment"
+                  sequence="20"/>
+
+        <menuitem id="menu_history_assignment"
+                  name="Assignment Logs"
+                  parent="menu_history"
+                  action="action_equipment_log_assignment"
+                  sequence="30"/>
     </data>
 </odoo>
