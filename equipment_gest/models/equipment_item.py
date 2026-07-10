@@ -25,6 +25,13 @@ class EquipmentItem(models.Model):
     # Computed: who currently has this equipment
     assigned_to_id = fields.Many2one('hr.employee', string='Assigned To', compute='_compute_assigned_to', store=True)
 
+    @api.model
+    def _name_search(self, name, domain=None, operator='ilike', limit=None, order=None):
+        domain = domain or []
+        if name:
+            domain = ['|', ('name', operator, name), ('serial_no', operator, name)] + domain
+        return self._search(domain, limit=limit, order=order)
+
     @api.depends('assignment_ids.state', 'assignment_ids.employee_id')
     def _compute_assigned_to(self):
         for record in self:
