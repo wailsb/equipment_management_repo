@@ -122,11 +122,9 @@
                     <filter name="assigned" string="Assigned" domain="[('status', '=', 'assigned')]"/>
                     <filter name="maintenance" string="Under Maintenance" domain="[('status', '=', 'maintenance')]"/>
                     <separator/>
-                    <group expand="0" string="Group By">
-                        <filter name="group_by_category" string="Category" context="{'group_by': 'category_id'}"/>
-                        <filter name="group_by_status" string="Status" context="{'group_by': 'status'}"/>
-                        <filter name="group_by_assigned" string="Assigned To" context="{'group_by': 'assigned_to_id'}"/>
-                    </group>
+                    <filter name="group_by_category" string="Category" context="{'group_by': 'category_id'}"/>
+                    <filter name="group_by_status" string="Status" context="{'group_by': 'status'}"/>
+                    <filter name="group_by_assigned" string="Assigned To" context="{'group_by': 'assigned_to_id'}"/>
                 </search>
             </field>
         </record>

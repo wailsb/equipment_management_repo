@@ -34,14 +34,11 @@
                     <separator/>
                     <filter name="today" string="Today" domain="[('date', '&gt;=', (context_today()).strftime('%Y-%m-%d'))]"/>
                     <filter name="this_week" string="This Week" domain="[('date', '&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"/>
-                    <separator/>
-                    <group expand="0" string="Group By">
-                        <filter name="group_by_type" string="Log Type" context="{'group_by': 'log_type'}"/>
-                        <filter name="group_by_action" string="Action" context="{'group_by': 'action'}"/>
-                        <filter name="group_by_user" string="User" context="{'group_by': 'user_id'}"/>
-                        <filter name="group_by_date" string="Date" context="{'group_by': 'date:day'}"/>
-                        <filter name="group_by_equipment" string="Equipment" context="{'group_by': 'equipment_id'}"/>
-                    </group>
+                    <filter name="group_by_type" string="Log Type" context="{'group_by': 'log_type'}"/>
+                    <filter name="group_by_action" string="Action" context="{'group_by': 'action'}"/>
+                    <filter name="group_by_user" string="User" context="{'group_by': 'user_id'}"/>
+                    <filter name="group_by_date" string="Date" context="{'group_by': 'date:day'}"/>
+                    <filter name="group_by_equipment" string="Equipment" context="{'group_by': 'equipment_id'}"/>
                 </search>
             </field>
         </record>
