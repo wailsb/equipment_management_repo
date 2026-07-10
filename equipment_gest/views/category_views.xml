@@ -6,6 +6,9 @@
             <field name="model">equipment.category</field>
             <field name="arch" type="xml">
                 <form string="Equipment Category">
+                    <header>
+                        <button name="action_save_and_close" string="Save &amp; Close" type="object" class="btn-primary"/>
+                    </header>
                     <sheet>
                         <div class="oe_title">
                             <h1>
@@ -37,6 +40,9 @@
             <field name="model">equipment.category</field>
             <field name="arch" type="xml">
                 <tree string="Equipment Categories">
+                    <header>
+                        <button name="%(action_equipment_import_wizard_category)d" string="Import Spreadsheet" type="action" class="btn-secondary"/>
+                    </header>
                     <field name="name"/>
                     <field name="equipment_count" string="# Equipment"/>
                 </tree>

@@ -10,6 +10,7 @@
                         <button name="action_confirm" string="Confirm" type="object" class="btn-primary" invisible="state != 'draft'"/>
                         <button name="action_return" string="Return Equipment" type="object" class="btn-primary" invisible="state != 'active'"/>
                         <button name="action_reset_draft" string="Reset to Draft" type="object" invisible="state == 'draft'"/>
+                        <button name="action_save_and_close" string="Save &amp; Close" type="object" class="btn-primary"/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,active,returned"/>
                     </header>
                     <sheet>
@@ -52,6 +53,9 @@
             <field name="model">equipment.assignment</field>
             <field name="arch" type="xml">
                 <tree string="Assignments">
+                    <header>
+                        <button name="%(action_equipment_import_wizard_assignment)d" string="Import Spreadsheet" type="action" class="btn-secondary"/>
+                    </header>
                     <field name="equipment_id"/>
                     <field name="employee_id"/>
                     <field name="department_id" optional="hide"/>

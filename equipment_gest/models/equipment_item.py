@@ -65,3 +65,19 @@ class EquipmentItem(models.Model):
                 'description': 'Equipment "%s" (S/N: %s) registered' % (record.name, record.serial_no),
             })
         return records
+
+    def action_save_and_close(self):
+        self.ensure_one()
+        return self.env.ref('equipment_gest.action_equipment_item').read()[0]
+
+    def action_open_assign_wizard(self):
+        self.ensure_one()
+        return {
+            'name': 'Assign Equipment',
+            'type': 'ir.actions.act_window',
+            'res_model': 'equipment.quick.assignment.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'default_equipment_id': self.id},
+        }
+

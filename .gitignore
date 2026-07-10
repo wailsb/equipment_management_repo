@@ -2,6 +2,7 @@
 .odoo_db_data/
 addons/
 docker-compose.yml
+import_samples/
 # Odoo Runtime Logging & Configurations
 *.log
 *.conf

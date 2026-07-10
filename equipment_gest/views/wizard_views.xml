@@ -1,0 +1,110 @@
+<odoo>
+    <data>
+        <!-- Import Wizard Form View -->
+        <record id="equipment_import_wizard_form_view" model="ir.ui.view">
+            <field name="name">equipment.import.wizard.form.view</field>
+            <field name="model">equipment.import.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Import from Spreadsheet">
+                    <sheet>
+                        <group>
+                            <field name="import_type" widget="radio"/>
+                            <field name="file" filename="filename"/>
+                            <field name="filename" invisible="1"/>
+                        </group>
+                        <div class="alert alert-info" role="alert">
+                            <h5>CSV File Templates &amp; Headers</h5>
+                            <hr/>
+                            <div invisible="import_type != 'category'">
+                                <strong>Columns:</strong> <code>name</code> (Category Name)<br/>
+                                <em>Example:</em><br/>
+                                <code>name</code><br/>
+                                <code>Laptops</code><br/>
+                                <code>Phones</code>
+                            </div>
+                            <div invisible="import_type != 'equipment'">
+                                <strong>Columns:</strong> <code>name</code> (required), <code>serial_no</code> (required/unique), <code>category</code> (optional), <code>status</code> (optional: available/assigned/maintenance), <code>notes</code> (optional)<br/>
+                                <em>Example:</em><br/>
+                                <code>name,serial_no,category,status,notes</code><br/>
+                                <code>MacBook Pro 16,SN123456,Laptops,available,Developer machine</code>
+                            </div>
+                            <div invisible="import_type != 'assignment'">
+                                <strong>Columns:</strong> <code>equipment_serial</code> (required), <code>employee</code> (required - Employee Name), <code>date_assigned</code> (YYYY-MM-DD), <code>date_returned</code> (optional, YYYY-MM-DD), <code>state</code> (optional: draft/active/returned), <code>notes</code> (optional)<br/>
+                                <em>Example:</em><br/>
+                                <code>equipment_serial,employee,date_assigned,state</code><br/>
+                                <code>SN123456,John Doe,2026-07-10,active</code>
+                            </div>
+                        </div>
+                    </sheet>
+                    <footer>
+                        <button name="action_import" string="Import" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Import Wizard Actions (pre-filtered by default type) -->
+        <record id="action_equipment_import_wizard_category" model="ir.actions.act_window">
+            <field name="name">Import Categories</field>
+            <field name="res_model">equipment.import.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{'default_import_type': 'category'}</field>
+        </record>
+
+        <record id="action_equipment_import_wizard_item" model="ir.actions.act_window">
+            <field name="name">Import Equipment</field>
+            <field name="res_model">equipment.import.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{'default_import_type': 'equipment'}</field>
+        </record>
+
+        <record id="action_equipment_import_wizard_assignment" model="ir.actions.act_window">
+            <field name="name">Import Assignments</field>
+            <field name="res_model">equipment.import.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{'default_import_type': 'assignment'}</field>
+        </record>
+
+        <!-- Quick Assignment Wizard Form View -->
+        <record id="equipment_quick_assignment_wizard_form_view" model="ir.ui.view">
+            <field name="name">equipment.quick.assignment.wizard.form.view</field>
+            <field name="model">equipment.quick.assignment.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Assign Equipment">
+                    <sheet>
+                        <group>
+                            <group string="Equipment Info">
+                                <field name="equipment_id"/>
+                            </group>
+                            <group string="Assignee details">
+                                <field name="employee_id"/>
+                                <field name="department_id"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Dates &amp; Location">
+                                <field name="date_assigned"/>
+                                <field name="location" placeholder="e.g. Office 204"/>
+                            </group>
+                            <group string="Usage details">
+                                <field name="purpose" placeholder="e.g. Work Laptop"/>
+                                <field name="condition_on_assign"/>
+                            </group>
+                        </group>
+                        <group string="Notes">
+                            <field name="notes" placeholder="Additional notes about the assignment..."/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_assign" string="Confirm Assignment" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
