@@ -7,7 +7,7 @@ services:
       - db
     ports:
       - "8069:8069"
-    command: odoo --addons-path=/usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons -d test_equipment_db -i equipment_gest
+    command: odoo --addons-path=/usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons -d test_equipment_db_18 -i equipment_gest
     volumes:
       - .:/mnt/extra-addons
     environment:
