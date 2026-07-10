@@ -35,7 +35,7 @@ equipment_gest/
         ir.model.access.csv     # permission matrix
 ```
 
-depends on `base` and `hr` only, no unnecessary dependencies
+depends on `base` and `hr`
 
 ## data model
 
