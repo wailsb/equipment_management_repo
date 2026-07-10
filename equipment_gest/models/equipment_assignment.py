@@ -97,18 +97,19 @@ class EquipmentAssignment(models.Model):
                 'description': 'Assignment reset to draft',
             })
 
-    @api.model
-    def create(self, vals):
-        record = super().create(vals)
-        self.env['equipment.log'].sudo().create({
-            'log_type': 'assignment',
-            'action': 'created',
-            'equipment_id': record.equipment_id.id,
-            'assignment_id': record.id,
-            'description': 'Assignment created: "%s" for %s' % (
-                record.equipment_id.name, record.employee_id.name),
-        })
-        return record
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        for record in records:
+            self.env['equipment.log'].sudo().create({
+                'log_type': 'assignment',
+                'action': 'created',
+                'equipment_id': record.equipment_id.id,
+                'assignment_id': record.id,
+                'description': 'Assignment created: "%s" for %s' % (
+                    record.equipment_id.name, record.employee_id.name),
+            })
+        return records
 
     def action_save_and_close(self):
         self.ensure_one()
