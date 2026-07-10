@@ -33,7 +33,7 @@
                         <notebook>
                             <page string="Assignment History">
                                 <field name="assignment_ids" readonly="1">
-                                    <tree>
+                                    <list>
                                         <field name="employee_id"/>
                                         <field name="date_assigned"/>
                                         <field name="date_returned"/>
@@ -41,7 +41,7 @@
                                                decoration-info="state == 'draft'"
                                                decoration-success="state == 'active'"
                                                decoration-muted="state == 'returned'"/>
-                                    </tree>
+                                    </list>
                                 </field>
                             </page>
                             <page string="Notes">
@@ -58,7 +58,7 @@
             <field name="name">equipment.item.tree.view</field>
             <field name="model">equipment.item</field>
             <field name="arch" type="xml">
-                <tree string="Equipment">
+                <list string="Equipment">
                     <header>
                         <button name="%(action_equipment_import_wizard_item)d" string="Import Spreadsheet" type="action" class="btn-secondary"/>
                     </header>
@@ -70,7 +70,7 @@
                            decoration-success="status == 'available'"
                            decoration-info="status == 'assigned'"
                            decoration-warning="status == 'maintenance'"/>
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -135,7 +135,7 @@
         <record id="action_equipment_item" model="ir.actions.act_window">
             <field name="name">Equipment</field>
             <field name="res_model">equipment.item</field>
-            <field name="view_mode">tree,kanban,form</field>
+            <field name="view_mode">list,kanban,form</field>
             <field name="search_view_id" ref="equipment_item_search_view"/>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
