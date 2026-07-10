@@ -18,14 +18,14 @@
                         <notebook>
                             <page string="Equipment Items">
                                 <field name="equipment_ids">
-                                    <tree>
+                                    <list>
                                         <field name="name"/>
                                         <field name="serial_no"/>
                                         <field name="status" widget="badge"
                                                decoration-success="status == 'available'"
                                                decoration-info="status == 'assigned'"
                                                decoration-warning="status == 'maintenance'"/>
-                                    </tree>
+                                    </list>
                                 </field>
                             </page>
                         </notebook>
@@ -39,13 +39,13 @@
             <field name="name">equipment.category.tree.view</field>
             <field name="model">equipment.category</field>
             <field name="arch" type="xml">
-                <tree string="Equipment Categories">
+                <list string="Equipment Categories">
                     <header>
                         <button name="%(action_equipment_import_wizard_category)d" string="Import Spreadsheet" type="action" class="btn-secondary"/>
                     </header>
                     <field name="name"/>
                     <field name="equipment_count" string="# Equipment"/>
-                </tree>
+                </list>
             </field>
         </record>
 

@@ -5,7 +5,7 @@
             <field name="name">equipment.log.tree.view</field>
             <field name="model">equipment.log</field>
             <field name="arch" type="xml">
-                <tree string="History" create="false" edit="false" delete="false">
+                <list string="History" create="false" edit="false" delete="false">
                     <field name="date"/>
                     <field name="user_id"/>
                     <field name="log_type" widget="badge"
@@ -15,7 +15,7 @@
                     <field name="equipment_id" string="Equipment"/>
                     <field name="assignment_id" string="Details" optional="show"/>
                     <field name="description"/>
-                </tree>
+                </list>
             </field>
         </record>
 
