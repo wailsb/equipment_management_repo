@@ -5,7 +5,7 @@
             <field name="name">equipment.log.tree.view</field>
             <field name="model">equipment.log</field>
             <field name="arch" type="xml">
-                <tree string="History" create="false" edit="false" delete="false">
+                <list string="History" create="false" edit="false" delete="false">
                     <field name="date"/>
                     <field name="user_id"/>
                     <field name="log_type" widget="badge"
@@ -15,7 +15,7 @@
                     <field name="equipment_id" string="Equipment"/>
                     <field name="assignment_id" string="Details" optional="show"/>
                     <field name="description"/>
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -77,14 +77,14 @@
         <record id="action_equipment_log_all" model="ir.actions.act_window">
             <field name="name">All History</field>
             <field name="res_model">equipment.log</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="search_view_id" ref="equipment_log_search_view"/>
         </record>
 
         <record id="action_equipment_log_equipment" model="ir.actions.act_window">
             <field name="name">Equipment Logs</field>
             <field name="res_model">equipment.log</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[('log_type', '=', 'equipment')]</field>
             <field name="search_view_id" ref="equipment_log_search_view"/>
         </record>
@@ -92,7 +92,7 @@
         <record id="action_equipment_log_assignment" model="ir.actions.act_window">
             <field name="name">Assignment Logs</field>
             <field name="res_model">equipment.log</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="domain">[('log_type', '=', 'assignment')]</field>
             <field name="search_view_id" ref="equipment_log_search_view"/>
         </record>
