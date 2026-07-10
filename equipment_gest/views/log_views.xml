@@ -12,8 +12,8 @@
                            decoration-info="log_type == 'equipment'"
                            decoration-success="log_type == 'assignment'"/>
                     <field name="action" widget="badge"/>
-                    <field name="equipment_id"/>
-                    <field name="assignment_id" optional="show"/>
+                    <field name="equipment_id" string="Equipment"/>
+                    <field name="assignment_id" string="Details" optional="show"/>
                     <field name="description"/>
                 </tree>
             </field>
