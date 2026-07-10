@@ -9,6 +9,7 @@
                     <header>
                         <button name="action_set_available" string="Set Available" type="object" class="btn-primary" invisible="status == 'available'"/>
                         <button name="action_set_maintenance" string="Send to Maintenance" type="object" invisible="status == 'maintenance'"/>
+                        <button name="action_save_and_close" string="Save &amp; Close" type="object" class="btn-primary"/>
                         <field name="status" widget="statusbar" statusbar_visible="available,assigned,maintenance"/>
                     </header>
                     <sheet>

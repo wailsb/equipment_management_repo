@@ -65,3 +65,7 @@ class EquipmentItem(models.Model):
                 'description': 'Equipment "%s" (S/N: %s) registered' % (record.name, record.serial_no),
             })
         return records
+
+    def action_save_and_close(self):
+        self.ensure_one()
+        return {'type': 'ir.actions.act_window_close'}
