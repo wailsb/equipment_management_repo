@@ -109,3 +109,13 @@ class EquipmentAssignment(models.Model):
                 record.equipment_id.name, record.employee_id.name),
         })
         return record
+
+    def action_save_and_close(self):
+        self.ensure_one()
+        return self.env.ref('equipment_gest.action_equipment_assignment').read()[0]
+
+    def _compute_display_name(self):
+        for record in self:
+            record.display_name = "Details"
+
+

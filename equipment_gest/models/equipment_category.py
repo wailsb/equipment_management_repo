@@ -13,3 +13,8 @@ class EquipmentCategory(models.Model):
     def _compute_equipment_count(self):
         for category in self:
             category.equipment_count = len(category.equipment_ids)
+
+    def action_save_and_close(self):
+        self.ensure_one()
+        return self.env.ref('equipment_gest.action_equipment_category').read()[0]
+

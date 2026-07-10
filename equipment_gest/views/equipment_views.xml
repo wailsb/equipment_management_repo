@@ -7,7 +7,8 @@
             <field name="arch" type="xml">
                 <form string="Equipment">
                     <header>
-                        <button name="action_set_available" string="Set Available" type="object" class="btn-primary" invisible="status == 'available'"/>
+                        <button name="action_open_assign_wizard" string="Assign Equipment" type="object" class="btn-primary" invisible="status != 'available'"/>
+                        <button name="action_set_available" string="Set Available" type="object" class="btn-secondary" invisible="status == 'available'"/>
                         <button name="action_set_maintenance" string="Send to Maintenance" type="object" invisible="status == 'maintenance'"/>
                         <button name="action_save_and_close" string="Save &amp; Close" type="object" class="btn-primary"/>
                         <field name="status" widget="statusbar" statusbar_visible="available,assigned,maintenance"/>
@@ -58,6 +59,9 @@
             <field name="model">equipment.item</field>
             <field name="arch" type="xml">
                 <tree string="Equipment">
+                    <header>
+                        <button name="%(action_equipment_import_wizard_item)d" string="Import Spreadsheet" type="action" class="btn-secondary"/>
+                    </header>
                     <field name="name"/>
                     <field name="serial_no"/>
                     <field name="category_id"/>
