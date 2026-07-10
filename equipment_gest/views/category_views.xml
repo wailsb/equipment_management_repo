@@ -54,7 +54,7 @@
             <field name="name">equipment.category.search.view</field>
             <field name="model">equipment.category</field>
             <field name="arch" type="xml">
-                <search string="Equipment Categories">
+                <search>
                     <field name="name"/>
                 </search>
             </field>

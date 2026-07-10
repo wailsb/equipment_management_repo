@@ -75,7 +75,7 @@
             <field name="name">equipment.assignment.search.view</field>
             <field name="model">equipment.assignment</field>
             <field name="arch" type="xml">
-                <search string="Assignments">
+                <search>
                     <field name="equipment_id"/>
                     <field name="employee_id"/>
                     <field name="location"/>

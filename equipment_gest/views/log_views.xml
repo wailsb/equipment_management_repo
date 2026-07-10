@@ -24,7 +24,7 @@
             <field name="name">equipment.log.search.view</field>
             <field name="model">equipment.log</field>
             <field name="arch" type="xml">
-                <search string="History">
+                <search>
                     <field name="equipment_id"/>
                     <field name="user_id"/>
                     <field name="description"/>

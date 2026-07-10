@@ -112,7 +112,7 @@
             <field name="name">equipment.item.search.view</field>
             <field name="model">equipment.item</field>
             <field name="arch" type="xml">
-                <search string="Equipment">
+                <search>
                     <field name="name" filter_domain="['|', ('name', 'ilike', self), ('serial_no', 'ilike', self)]" string="Equipment"/>
                     <field name="serial_no"/>
                     <field name="category_id"/>
